@@ -1,4 +1,30 @@
-<nav>
+<script>
+  import { Hamburger } from "svelte-hamburgers";
+import { fly } from 'svelte/transition';
+  let open = $state(false);
+
+</script>
+<!-- mobile navbar -->
+<nav class="nav-mobile">
+  <Hamburger
+    bind:open
+    type="spin"
+    title="Toggle nav links"
+    ariaControls="nav"
+  />
+
+  {#if open}
+    <ul id="nav" class="menu"  transition:fly={{ y: -15 }}>
+       <h1>Nandita Badeloe</h1>
+       <li><a href="/">Home</a></li>
+      <li><a href="/">Design</a></li>
+      <li><a href="/">Projects</a></li>
+      <li><a href="/">Contact</a></li>
+    </ul>
+  {/if}
+</nav>
+<!-- desptop navbar -->
+<nav class="nav-desktop">
   <ul>
     <li><a href="/">Home</a></li>
     <li><a href="/">Design</a></li>
@@ -9,7 +35,10 @@
 </nav>
 
 <style>
-  nav {
+    .nav-mobile{
+        display: none;
+    }
+  .nav-desktop {
     background-color: aqua;
     color: #f9f9f9;
     display: flex;
@@ -21,55 +50,74 @@
     border-radius: 2em;
     border: 2px #f9f9f9 solid;
   }
-  nav > ul {
+  .nav-desktop  > ul {
     display: flex;
     justify-content: space-between;
   }
 
-  nav > ul,
+  .nav-desktop  > ul,
   li {
     list-style: none;
     padding: 1em;
     margin: 1em 4em;
   }
 
-  nav > ul a{
+  .nav-desktop  > ul a {
     color: #f9f9f9;
     text-decoration: none;
   }
   @media screen and (min-width: 390px) and (max-width: 950px) {
-    nav {
-     background-color:pink;
+    .nav-desktop  {
+      background-color: pink;
       height: 3.5em;
       flex-direction: column;
     }
-      nav > ul,
-  li {
-    list-style: none;
-    padding: 0.5em;
-    margin: 1.5em 2em;
-    align-items: center;
-  }
-  ul > h1{
-    margin: 0 1em;
-  }
-  }
-    @media screen and (min-width: 0px) and (max-width: 650px) {
-    nav {
-     background-color:red;
-      height: 3.5em;
-      flex-direction: column;
+    .nav-desktop  > ul,
+    li {
+      list-style: none;
+      padding: 0.5em;
+      margin: 1.5em 2em;
+      align-items: center;
     }
-      nav > ul,
-  li {
-    list-style: none;
-    padding: 0.5em;
-    margin: 1.5em 2em;
-    align-items: center;
-  }
-  ul > h1{
-    margin: 0 1em;
+    ul > h1 {
+      margin: 0 1em;
+    }
   }
 
+/* styling navbar mobile */
+
+  @media screen and (min-width: 0px) and (max-width: 650px) {
+    .nav-mobile{
+        display: flex;
+        align-items: unset;
+    }
+    #nav{
+        background-color: darkseagreen;
+        height: fit-content;
+        width: 90%;
+    }
+    .nav-desktop {
+        display: none;
+        flex-direction: unset;
+    }
+    /* nav {
+      background-color: red;
+      height: 3.5em;
+      flex-direction: column;
+     } */
+
+    .nav-mobile > ul,
+    li {
+        flex-direction: column;
+      list-style: none;
+      align-items: center;
+    }
+    /* ul > h1 { 
+      margin: 0 1em;
+    } */
+     .hamburger{
+        display: flex;
+        color: blue;
+     }
   }
 </style>
