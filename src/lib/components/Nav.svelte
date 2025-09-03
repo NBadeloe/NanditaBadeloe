@@ -1,27 +1,15 @@
-<script>
-  import { Hamburger } from "svelte-hamburgers";
-import { fly } from 'svelte/transition';
-  let open = $state(false);
-
-</script>
 <!-- mobile navbar -->
-<nav class="nav-mobile">
-  <Hamburger
-    bind:open
-    type="spin"
-    title="Toggle nav links"
-    ariaControls="nav"
-  />
 
-  {#if open}
-    <ul id="nav" class="menu"  transition:fly={{ y: -15 }}>
+  <input type="checkbox" name="hamburger" id="hamburger">
+  <label for="hamburger">♡</label>
+<nav class="nav-mobile">
+    <ul>
        <h1>Nandita Badeloe</h1>
        <li><a href="/">Home</a></li>
       <li><a href="/">Design</a></li>
       <li><a href="/">Projects</a></li>
       <li><a href="/">Contact</a></li>
     </ul>
-  {/if}
 </nav>
 <!-- desptop navbar -->
 <nav class="nav-desktop">
@@ -36,6 +24,9 @@ import { fly } from 'svelte/transition';
 
 <style>
     .nav-mobile{
+        display: none;
+    }
+    input, label{
         display: none;
     }
   .nav-desktop {
@@ -87,37 +78,39 @@ import { fly } from 'svelte/transition';
 /* styling navbar mobile */
 
   @media screen and (min-width: 0px) and (max-width: 650px) {
-    .nav-mobile{
-        display: flex;
-        align-items: unset;
+      .nav-desktop {
+        display: none;
     }
-    #nav{
+    #hamburger{
+        display: none;
+    }
+    #hamburger:checked ~ .nav-mobile{
+        display: flex;
+        align-items: center;
         background-color: darkseagreen;
         height: fit-content;
         width: 90%;
-    }
-    .nav-desktop {
-        display: none;
-        flex-direction: unset;
-    }
-    /* nav {
-      background-color: red;
-      height: 3.5em;
-      flex-direction: column;
-     } */
-
+   }
+   label{
+    text-align: left;
+    display: block;
+    padding: 0.5em;
+    line-height: 1.6em;
+    align-self: center;
+   }
+   
+     
     .nav-mobile > ul,
     li {
+        display: flex;
         flex-direction: column;
       list-style: none;
       align-items: center;
     }
-    /* ul > h1 { 
-      margin: 0 1em;
-    } */
-     .hamburger{
-        display: flex;
-        color: blue;
-     }
+    
+    input[type="checkbox"]{
+        background-color: aqua;
+    }
+  
   }
 </style>
